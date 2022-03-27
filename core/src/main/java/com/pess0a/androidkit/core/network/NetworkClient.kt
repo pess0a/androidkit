@@ -8,8 +8,10 @@ import com.pess0a.androidkit.core.providers.HttpClientProvider
 import com.pess0a.androidkit.core.utils.ConnectionUtils
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 interface NetworkClient {
 
@@ -51,8 +53,18 @@ interface NetworkClient {
             return NetworkClientImpl(retrofit.build())
         }
 
+        fun addLoggerInterceptor(isDebuggable : Boolean): Builder {
+            if(isDebuggable) {
+                val logging = HttpLoggingInterceptor()
+                logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+                addInterceptor(logging)
+            }
+            return this
+        }
+
         private fun addConnectionInterceptor() {
             val interceptor = ConnectionInterceptor(connectionUtils)
+
             addInterceptor(interceptor)
         }
 

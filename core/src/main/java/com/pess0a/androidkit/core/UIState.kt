@@ -14,22 +14,8 @@ sealed class UIState<out E, out S> {
         return this
     }
 
-    fun onErrorState(onResult: (ErrorStateEnum) -> Unit): UIState<E, S> {
-        if (this is Error && this.error is Exception) {
-            onResult(ErrorStateEnum.GENERIC_ERROR)
-        }
-        return this
-    }
-
     fun onError(onResult: (E) -> Unit): UIState<E, S> {
         if (this is Error) {
-            onResult(this.error)
-        }
-        return this
-    }
-
-    fun <T> onError(type: Class<T>, onResult: (E) -> Unit): UIState<E, S> {
-        if (this is Error && type.isInstance(this.error)) {
             onResult(this.error)
         }
         return this
@@ -39,12 +25,4 @@ sealed class UIState<out E, out S> {
         onResult(this is Loading)
         return this
     }
-}
-
-enum class ErrorStateEnum(
-    val message: String
-) {
-    GENERIC_ERROR(
-        "Erro, favor contactar o administrador."
-    )
 }

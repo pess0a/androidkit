@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface SampleApi {
 
-    @GET("countries/countries")
+    @GET("acountries/countries")
     suspend fun getCountries(): Response<List<CountriesDto>>
 }

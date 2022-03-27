@@ -26,8 +26,12 @@ class SampleActivity : AppCompatActivity() {
         binding.errorView.isVisible = state is UIState.Error
 
         state.apply {
-            onSuccess { binding.textViewResult.text = it.toString() }
-            onError { binding.textViewResult }
+            onSuccess {
+                binding.textViewResult.text = it.toString()
+            }
+            onError {
+                binding.textViewResult
+            }
         }
     }
 }

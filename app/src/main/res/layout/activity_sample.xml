@@ -26,7 +26,8 @@
         <TextView
             android:id="@+id/text_view_error"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="error"/>
 
     </FrameLayout>
 
